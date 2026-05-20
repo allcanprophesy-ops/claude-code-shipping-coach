@@ -1,0 +1,7 @@
+# local-only files (not for public repo)
+DISTRIBUTION.md
+DEMO-SCRIPT.md
+LAUNCH-REPLIES.md
+
+# macOS noise
+.DS_Store

@@ -1,0 +1,103 @@
+# shipping-coach
+
+**A free Claude Code subagent that catches the embarrassing stuff before it reaches `main`.**
+
+Leftover `console.log`. Hardcoded API keys. A `.skip` you forgot to remove. A `.DS_Store` that snuck into the diff. The kind of thing you'd catch yourself if you weren't tired.
+
+`shipping-coach` is the pre-flight check. Runs in under 90 seconds. Doesn't autofix anything — just tells you what's wrong, with file:line evidence, in a format you can act on without re-reading.
+
+---
+
+## What it catches
+
+| Category | Examples |
+|---|---|
+| **Debug residue** | `console.log`, `print(`, `debugger`, `.only(`, `.skip(`, new `TODO`/`FIXME` |
+| **Secret leaks** | API key shapes (`sk-`, `ghp_`, `AKIA`, `AIza`…), private keys, credentials in URLs |
+| **Broken builds** | Typecheck, lint, tests — detected automatically from `package.json` / `Makefile` / etc. |
+| **Tracked junk** | `.DS_Store`, `.env`, `node_modules/`, build output that snuck past `.gitignore` |
+| **Migration gotchas** | Missing rollback, large-table changes without `CONCURRENTLY`, deploy-order coupling |
+| **Lockfile drift** | Phantom lockfile changes, new low-trust dependencies |
+
+Only flags things **added by your current diff**. Pre-existing junk is somebody else's problem.
+
+## Install (30 seconds)
+
+```bash
+# user-level (works in all your projects)
+mkdir -p ~/.claude/agents
+curl -fsSL https://raw.githubusercontent.com/allcanprophesy-ops/claude-code-shipping-coach/main/shipping-coach.md \
+  -o ~/.claude/agents/shipping-coach.md
+```
+
+Or clone and copy:
+
+```bash
+git clone https://github.com/allcanprophesy-ops/claude-code-shipping-coach.git
+cp claude-code-shipping-coach/shipping-coach.md ~/.claude/agents/
+```
+
+Project-scoped install:
+
+```bash
+mkdir -p .claude/agents && cp shipping-coach.md .claude/agents/
+```
+
+## Use it
+
+Open Claude Code in any repo with uncommitted changes and say:
+
+> *"Run the pre-flight check on my diff."*
+
+Or just:
+
+> *"Anything I missed before I merge?"*
+
+You'll get back a report like this:
+
+```
+## Pre-ship report (took 47s)
+
+### 🛑 Blockers (2)
+- Hardcoded API key at src/lib/openai.ts:14 — starts with `sk-proj-…`. Move to env.
+- `console.log("DEBUG:", user)` added at src/auth/login.ts:88
+
+### ⚠️ Worth a look (1)
+- New TODO at src/billing/invoice.ts:203 — "fix tax rounding before launch"
+
+### ✅ Passed
+- Typecheck: pass
+- Lint: pass (warnings: 0)
+- Tests: pass (147 tests, 12.3s — ran related-only)
+- Tracked junk: clean
+- Migration sanity: N/A
+
+Do not merge until blockers are resolved.
+```
+
+## Why this exists
+
+Most "AI code review" tools want to review *everything*. They produce long reports that train you to ignore them. This agent does the opposite — narrow scope, high signal, written rules about when to refuse and when to stop.
+
+The agent file is ~50 lines of carefully tuned prompt. Open `shipping-coach.md`, read it, edit it. It's MIT-licensed and meant to be forked.
+
+## What's not in this freebie
+
+This is one agent from a 7-agent pack. The full pack adds:
+
+- **pr-surgeon** — Writes PR titles + bodies + real test plans from the actual diff, not the commit messages.
+- **commit-historian** — Turns a messy WIP into clean atomic commits. Refuses to rewrite `main`.
+- **test-gap-hunter** — Ranks missing tests by blast radius, with evidence.
+- **bug-reproducer** — Writes a failing test *before* anyone proposes a fix.
+- **dependency-detective** — Audits packages for unused, redundant, and risky deps.
+- **regression-sentinel** — Reads the diff with one question: "what existing behavior could this break?" Runs on `opus`.
+
+If `shipping-coach` clicks for you, the rest of the pack is on Gumroad → **[claude-code-pro-agents](https://peterverse180.gumroad.com/l/claude-code-pro-agents)** ($5+, pay what you want).
+
+## License
+
+MIT. Fork it, ship it, modify it for your team. No attribution required.
+
+## Feedback
+
+Built something useful with this? Caught a sharp edge? Open an issue — it'll get read.
