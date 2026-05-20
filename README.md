@@ -90,9 +90,9 @@ This is one agent from a 7-agent pack. The full pack adds:
 - **test-gap-hunter** — Ranks missing tests by blast radius, with evidence.
 - **bug-reproducer** — Writes a failing test *before* anyone proposes a fix.
 - **dependency-detective** — Audits packages for unused, redundant, and risky deps.
-- **regression-sentinel** — Reads the diff with one question: "what existing behavior could this break?" Runs on `opus`.
+- **regression-sentinel** — Reads the diff with one question: "what existing behavior could this break?" Runs on `opus` for deeper reasoning.
 
-If `shipping-coach` clicks for you, the rest of the pack is on Gumroad → **[claude-code-pro-agents](https://peterverse180.gumroad.com/l/claude-code-pro-agents)** ($5+, pay what you want).
+If `shipping-coach` clicks for you, the full pack is on Gumroad → **[claude-code-solo-dev-review](https://peterverse180.gumroad.com/l/claude-code-solo-dev-review)** ($15).
 
 ## License
 
