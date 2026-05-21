@@ -83,7 +83,9 @@ The agent file is ~50 lines of carefully tuned prompt. Open `shipping-coach.md`,
 
 ## What's not in this freebie
 
-This is one agent from a 7-agent pack. The full pack adds:
+This is one agent from the larger Claude Code Pro collection. Two paid packs are available:
+
+### The Agents Pack — 6 more autonomous workers in the same style
 
 - **pr-surgeon** — Writes PR titles + bodies + real test plans from the actual diff, not the commit messages.
 - **commit-historian** — Turns a messy WIP into clean atomic commits. Refuses to rewrite `main`.
@@ -92,7 +94,21 @@ This is one agent from a 7-agent pack. The full pack adds:
 - **dependency-detective** — Audits packages for unused, redundant, and risky deps.
 - **regression-sentinel** — Reads the diff with one question: "what existing behavior could this break?" Runs on `opus`.
 
-If `shipping-coach` clicks for you, the rest of the pack is on Gumroad → **[claude-code-pro-agents](https://peterverse180.gumroad.com/l/claude-code-pro-agents)** ($5+, pay what you want).
+→ **[Claude Code Pro Agents](https://peterverse180.gumroad.com/l/claude-code-pro-agents)** — $5+ PWYW.
+
+### The Skills Pack — 7 loaded-context disciplines
+
+Skills are different from agents. Agents do work for you (run commands, produce reports). Skills shape how Claude *reasons* when your prompt triggers them.
+
+- **release-notes-craftsman** — Drafts release notes in 3 voices from commit history.
+- **migration-safe** — Engine-specific migration safety review (Postgres, MySQL, SQLite).
+- **api-contract-keeper** — Backwards-compat audit for API changes.
+- **error-message-craftsman** — Improves error message quality with the what/why/what-now framework.
+- **observability-eye** — Right-amount-of-logging guidance, cardinality risk surfacing.
+- **changelog-keeper** — Keep-a-Changelog discipline.
+- **flag-hygiene** — Feature flag taxonomy + the 30/60/90 cleanup rhythm.
+
+→ **[Claude Code Pro Skills](https://peterverse180.gumroad.com/l/claude-code-pro-skills)** — $7+ PWYW.
 
 ## License
 
