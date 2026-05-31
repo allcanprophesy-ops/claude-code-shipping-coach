@@ -6,6 +6,8 @@ Leftover `console.log`. Hardcoded API keys. A `.skip` you forgot to remove. A `.
 
 `shipping-coach` is the pre-flight check. Runs in under 90 seconds. Doesn't autofix anything — just tells you what's wrong, with file:line evidence, in a format you can act on without re-reading.
 
+> 📖 **Read the writeup:** [The best Claude Code agents are defined by what they refuse to do](https://dev.to/peterverse180/the-best-claude-code-agents-are-defined-by-what-they-refuse-to-do-13p2) — the design pattern behind this agent.
+
 ---
 
 ## What it catches
