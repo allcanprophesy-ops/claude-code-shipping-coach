@@ -10,6 +10,7 @@ Leftover `console.log`. Hardcoded API keys. A `.skip` you forgot to remove. A `.
 > - [The best Claude Code agents are defined by what they refuse to do](https://dev.to/peterverse180/the-best-claude-code-agents-are-defined-by-what-they-refuse-to-do-13p2)
 > - [Your AI writes PR descriptions from your commit messages. That's the bug.](https://dev.to/peterverse180/your-ai-writes-pr-descriptions-from-your-commit-messages-thats-the-bug-795)
 > - [Why Claude Code never runs your subagent](https://dev.to/peterverse180/why-claude-code-never-runs-your-subagent-4afm)
+> - [Writing a CLAUDE.md that Claude actually follows](https://dev.to/peterverse180/writing-a-claudemd-that-claude-actually-follows-4llo)
 
 ---
 
