@@ -1,0 +1,72 @@
+# ============================================================================
+#  Trading bot configuration — THIS IS YOUR REFINEMENT SURFACE.
+#  Change values here, re-run `python run_backtest.py`, and compare metrics.
+#  Nothing in the code is hardcoded that you'd reasonably want to tune.
+# ============================================================================
+
+universe:
+  # The assets the strategy rotates between. ETFs keep it liquid + survivorship
+  # -bias-free (they rarely delist). Add/remove tickers freely.
+  # These are the 11 US sector SPDRs — a classic sector-rotation universe.
+  risk_assets:
+    - XLK   # Technology
+    - XLF   # Financials
+    - XLV   # Health Care
+    - XLE   # Energy
+    - XLI   # Industrials
+    - XLY   # Consumer Discretionary
+    - XLP   # Consumer Staples
+    - XLU   # Utilities
+    - XLB   # Materials
+    - XLRE  # Real Estate
+    - XLC   # Communication Services
+  # Where the strategy parks capital when a sleeve fails the absolute-momentum
+  # or regime test (the "crash filter" destination). Cash = hold nothing.
+  defensive_asset: BIL   # 1-3 month T-bill ETF (cash proxy). Use AGG/IEF for bonds.
+  # Benchmark used for absolute momentum (must the asset beat this to be held?).
+  # BIL ~ risk-free / cash. Beating cash = positive absolute momentum.
+  cash_proxy: BIL
+
+strategy:
+  # --- Relative momentum: rank assets by blended trailing return ---
+  # Lookbacks in TRADING days (~21/month). The blend averages several horizons
+  # so no single window dominates (Carver-style parameter diversification).
+  momentum_lookbacks_days: [63, 126, 252]   # ~3, 6, 12 months
+  momentum_weights:        [0.0, 0.0, 1.0]  # weight per lookback; here: 12mo only
+  top_n: 3                  # how many top-ranked sectors to hold
+
+  # --- Absolute momentum: only hold a winner if it also beats cash ---
+  use_absolute_momentum: true
+  absolute_momentum_lookback_days: 252
+
+  # --- Regime filter: only hold if price is above its long SMA ---
+  use_regime_filter: true
+  regime_sma_days: 200
+
+  rebalance: month-end      # month-end | week-end (lower freq = fewer costs/taxes)
+
+risk:
+  # Fixed-fractional / equal-weight allocation across selected sleeves.
+  max_weight_per_position: 0.40   # cap any single sleeve (0.40 = 40%)
+  target_total_exposure: 1.00     # 1.0 = fully invested; <1.0 holds cash buffer
+
+  # Drawdown kill-switch: if portfolio drawdown from its peak exceeds this,
+  # the strategy goes fully defensive until a new equity high is reclaimed.
+  # Set to null to disable. This is your circuit breaker.
+  max_drawdown_killswitch: 0.25   # 25%
+
+costs:
+  # Applied on TURNOVER each rebalance. Be conservative — costs kill thin edges.
+  commission_bps: 1.0       # per-side, in basis points of traded notional
+  slippage_bps: 5.0         # modeled slippage in bps
+
+backtest:
+  start: "2016-01-01"
+  end: null                 # null = today
+  initial_capital: 10000
+
+data:
+  source: auto              # auto | yfinance | synthetic
+  # `auto` tries yfinance, falls back to deterministic SYNTHETIC data if the
+  # network is unavailable so the backtest always runs (clearly labeled).
+  cache_dir: .cache

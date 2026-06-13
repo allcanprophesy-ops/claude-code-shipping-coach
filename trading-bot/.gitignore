@@ -1,0 +1,12 @@
+# runtime artifacts
+.cache/
+order_plan.json
+equity_curve.png
+*.csv
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# secrets — NEVER commit broker keys
+.env
+secrets.yaml

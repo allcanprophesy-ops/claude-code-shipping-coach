@@ -1,0 +1,13 @@
+# Core (required)
+pandas>=2.0
+numpy>=1.24
+pyyaml>=6.0
+
+# Real market data (optional — code falls back to synthetic data offline)
+yfinance>=0.2.40
+
+# Plotting (optional — only for `run_backtest.py --plot`)
+# matplotlib>=3.7
+
+# Testing (optional)
+# pytest>=8.0
